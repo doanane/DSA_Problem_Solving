@@ -1,11 +1,9 @@
-def solution(numbers, thresholds):
-    if len(numbers)< 3:
+def solution(number, threshold):
+    if len(number)< 2:
         return -1
-    
-    for i in range(len(numbers)-2):
-        if numbers[i]> thresholds and numbers[i + 1] > thresholds and numbers[i + 2]:
+    for i in range(len(number)-2):
+        if number[i]> threshold and number[i + 1] > threshold and number[i+2]:
             return i
-
     return -1
 
 def run_tests():
