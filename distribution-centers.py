@@ -1,26 +1,29 @@
 def solution(centerCapacities, dailyLog):
-    
+    # Step 1: Setup
     n = len(centerCapacities)
-    current_capacity = centerCapacities.copy()  
-    total_processed = [0] * n  
-    is_open = [True] * n  
+    current_capacity = centerCapacities.copy()  # Track remaining capacity
+    total_processed = [0] * n  # Track packages processed per center
+    is_open = [True] * n  # Track which centers are open
     
-    current_center = 0  
+    # Step 2: Process log
+    current_center = 0  # Start at first center
     
     for entry in dailyLog:
         if entry.startswith("CLOSURE"):
-            
+            # Parse which center closes
             center_idx = int(entry.split()[1])
             is_open[center_idx] = False
             current_capacity[center_idx] = 0
-        else:  
-            
+        else:  # "PACKAGE"
+            # Find next open center with capacity
             attempts = 0
             while attempts < n:
                 if is_open[current_center] and current_capacity[current_center] > 0:
-                    
+                    # This center can take the package
                     current_capacity[current_center] -= 1
-                    total_processed[current_center] += 1       
+                    total_processed[current_center] += 1
+                    
+                    # Check if we need to reset all centers
                     all_at_zero = True
                     for i in range(n):
                         if is_open[i] and current_capacity[i] > 0:
@@ -28,18 +31,18 @@ def solution(centerCapacities, dailyLog):
                             break
                     
                     if all_at_zero:
-                        
+                        # Reset all open centers
                         for i in range(n):
                             if is_open[i]:
                                 current_capacity[i] = centerCapacities[i]
                     
-                    break  
+                    break  # Package processed, move to next log entry
                 
-                
+                # Move to next center
                 current_center = (current_center + 1) % n
                 attempts += 1
     
-    
+    # Step 3: Find center with max packages
     max_packages = -1
     max_index = -1
     
