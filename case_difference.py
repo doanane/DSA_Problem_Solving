@@ -7,3 +7,4 @@ def solution(typedText):
         elif ch.islower():
             lower_count +=1
     return upper_count - lower_count
+
