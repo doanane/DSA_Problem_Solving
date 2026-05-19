@@ -1,29 +1,10 @@
 def solution(finish, scooters):
-    scooters.sort()
-    i = 0
+    scooter.sort()
+    i =0 
+    current = 0
     total = 0
-    current =0 
-    n = len(scooters)
+    n =  len(scooters)
 
-    while current < finish:
-        while i < n and scooters[i]< current:
-            i +=1 
-        if i == n:
-            break
-        ride_start = scooters[i]
-        if ride_start > finish:
-            break
-        current = ride_start
-        ride_end = min(ride_start + 10, finish)
-        total += ride_end -  ride_start 
-        current = ride_end
-
-        if ride_end == ride_start:
-            i +=1
-        else:
-            i +=1
-
-    return total
 
 
 

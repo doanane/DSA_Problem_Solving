@@ -1,87 +1,107 @@
-Question 1 – Three Consecutive Elements Greater Than Threshold
-Problem:
-Create an array of integers, numbers. Find the first index i for which three consecutive elements
-numbers[i], numbers[i+1], and numbers[i+2] are all greater than a given threshold.
-If there is no such index, return -2.
+# DSA Practice — Questions
 
-Example:
-For markers = [0, 1, 4, 5, 7, 9] and threshold = 1, the output should be 1.
+This file contains a cleaned, well-formatted set of four practice questions. Each question includes: a clear problem statement, input/output format, constraints, examples, and hints where helpful.
 
-Constraints:
-Time complexity not worse than 
-O
-(
-length
-2
-)
-O(length 
-2
- ) is acceptable.
+---
 
-Question 2 – Skeletons Matching Word (Dot Placeholder)
-Problem:
-You are given a string word consisting of lowercase letters, and a list of skeletons.
-Every skeleton has the same length as word.
-A skeleton can form the word if all . characters can be replaced with other characters (taken from the same skeleton) to make the string equal to word.
+## Question 1 — Three Consecutive Elements Greater Than Threshold
 
-Return:
+**Problem.**
+Given an integer array `numbers` and an integer `threshold`, find the first index `i` such that
+`numbers[i]`, `numbers[i+1]`, and `numbers[i+2]` are all greater than `threshold`.
+If no such index exists, return `-2`.
 
-A list of skeletons that can form the word.
+**Input.**
+- `numbers`: list of integers (length >= 0)
+- `threshold`: integer
 
-If no skeletons can form the word, return an empty list.
+**Output.**
+- An integer index `i` (0-based) of the first valid triple, or `-2` if none exists.
 
-Matching skeletons should be returned in the same order they appear in skeletons.
+**Example.**
+Input: `numbers = [0, 1, 4, 5, 7, 9]`, `threshold = 1`  
+Output: `1`  (because 1→ elements `[1,4,5]` all > 1 and 1 is the first such index)
 
-The list may contain duplicates.
+**Constraints & Notes.**
+- Acceptable time complexity: O(n^2) or better (O(n) is possible by scanning once).
+- Edge cases: if `numbers.length < 3`, return `-2`.
 
-Example:
-For word = "hello" and skeletons = ["hello", "hero", "+n1-", "hello"],
-the output should be ["hello", "hello"].
+**Hint.**
+- Slide a window of size 3 across the array and check the condition.
 
-Note: You are not expected to provide the most optimal solution. A solution with time complexity not worse than 
-O
-(
-skeletons.length
-×
-word.length
-2
-)
-O(skeletons.length×word.length 
-2
- ) is acceptable.
+---
 
-Question 3 – Skeletons Matching Word (Dash Placeholder)
-Problem:
-Same as Question 2, but placeholders can be - (dash) instead of or in addition to ..
+## Question 2 — Skeletons Matching Word (Dot Placeholder)
 
-Example:
-For word = "hello" and skeletons = ["hello", "hero", "-q1", "hello"],
-the output should be ["hello", "hello"].
+**Problem.**
+You are given a target string `word` (lowercase letters) and a list of `skeletons`. Every skeleton has the same length as `word`.
+A skeleton can form `word` if every `.` character in the skeleton can be replaced by characters (selected from other positions in the same skeleton) so that the resulting string equals `word`.
 
-Explanation given:
+Return a list of skeletons that can form `word`, keeping the original order. Return an empty list if none match. Duplicates in `skeletons` are allowed and should be preserved.
 
-"hello" → matches directly.
+**Input.**
+- `word`: string of lowercase letters
+- `skeletons`: list of strings (each same length as `word`)
 
-"hero" → fails because placeholders cannot match both l characters.
+**Output.**
+- List of skeleton strings that can form `word`.
 
-"-q1" → fails due to mismatched placeholders.
+**Example.**
+Input: `word = "hello"`, `skeletons = ["hello", "hero", "+n1-", "hello"]`  
+Output: `["hello", "hello"]`
 
-"hello" → matches directly.
+**Complexity (acceptable).**
+- A solution with time complexity O(skeletons.length * word.length^2) is acceptable.
 
-Question 4 – Maximum Overlap Point from Lamps
-Problem:
-You are given a two-dimensional array lamps. Each lamp has:
+**Notes & approach.**
+- For each skeleton, check if every non-dot position matches `word`. For dots, ensure they can be substituted from characters available in the skeleton at other positions (implementation detail depends on exact rules — if dots can be any letter independent of the skeleton, the check is simpler).
 
-An initial position (integer)
+---
 
-A radius (non-integer? possibly integer based on example)
+## Question 3 — Skeletons Matching Word (Dash Placeholder)
 
-Each lamp covers the interval [position - radius, position + radius].
-Your task is to find the coordinate of the point that is covered by the maximum number of lamps.
-If there are multiple such points, return the smallest coordinate.
+**Problem.**
+Same as Question 2, but skeletons may use `-` (dash) as a placeholder instead of, or in addition to, `.`. Dashes are treated like dots for the matching rule described in Question 2.
 
-Given in description:
-lamps = [[x1, 3], [2, 3], [2, 3]] — but values are unclear.
+**Example.**
+Input: `word = "hello"`, `skeletons = ["hello", "hero", "-q1", "hello"]`  
+Output: `["hello", "hello"]`
 
-Return:
-A single integer (or float) representing the best coordinate.
+**Explanation (from example).**
+- `"hello"` → direct match.  
+- `"hero"` → fails because placeholders (if any) cannot match both `l` characters in `hello` under the skeleton's constraints.  
+- `"-q1"` → fails due to mismatched placeholders/characters.  
+- `"hello"` → matches directly.
+
+**Notes.**
+- Clarify placeholder semantics before implementing: whether each placeholder is free to map to any letter, or must map only to characters present somewhere in the same skeleton.
+
+---
+
+## Question 4 — Point of Maximum Overlap from Lamps
+
+**Problem.**
+You are given a list `lamps` where each lamp is described by `[position, radius]`. Each lamp covers the interval `[position - radius, position + radius]` on the number line.
+
+Find the coordinate of a point that is covered by the maximum number of lamps. If multiple coordinates have the same maximum coverage, return the smallest such coordinate.
+
+**Input.**
+- `lamps`: list of pairs `[position, radius]` where `position` is an integer and `radius` is a non-negative number (integer or float).
+
+**Output.**
+- A number (integer or float) representing the smallest coordinate with maximum coverage.
+
+**Example (illustrative).**
+If `lamps = [[1, 3], [2, 3], [5, 2]]`, the coverage intervals are `[-2,4]`, `[-1,5]`, and `[3,7]`. The point `3` is covered by all three lamps, so return `3`.
+
+**Hints & approach.**
+- Sweep line: treat each interval start as `+1` and each interval end as `-1`, sort events, and scan to maintain current overlap count. Track the coordinate(s) where the overlap is maximum.
+- If intervals are continuous floats, be careful with open/closed endpoints; the problem as stated treats intervals as closed `[a, b]`.
+
+---
+
+If you'd like, I can also:
+- provide sample implementations (Python) for each question, or
+- add unit tests and a small runner that exercises the examples.
+
+File: [questions.txt](questions.txt)

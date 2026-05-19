@@ -1,6 +1,3 @@
-
-
-
 def solution(typedText):
     upper_count = 0
     lower_count = 0
@@ -10,6 +7,8 @@ def solution(typedText):
         elif ch.islower():
             lower_count += 1
     return upper_count - lower_count
+
+
 
 
 def run_tests():
