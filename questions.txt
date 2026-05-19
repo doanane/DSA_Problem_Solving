@@ -1,0 +1,87 @@
+Question 1 – Three Consecutive Elements Greater Than Threshold
+Problem:
+Create an array of integers, numbers. Find the first index i for which three consecutive elements
+numbers[i], numbers[i+1], and numbers[i+2] are all greater than a given threshold.
+If there is no such index, return -2.
+
+Example:
+For markers = [0, 1, 4, 5, 7, 9] and threshold = 1, the output should be 1.
+
+Constraints:
+Time complexity not worse than 
+O
+(
+length
+2
+)
+O(length 
+2
+ ) is acceptable.
+
+Question 2 – Skeletons Matching Word (Dot Placeholder)
+Problem:
+You are given a string word consisting of lowercase letters, and a list of skeletons.
+Every skeleton has the same length as word.
+A skeleton can form the word if all . characters can be replaced with other characters (taken from the same skeleton) to make the string equal to word.
+
+Return:
+
+A list of skeletons that can form the word.
+
+If no skeletons can form the word, return an empty list.
+
+Matching skeletons should be returned in the same order they appear in skeletons.
+
+The list may contain duplicates.
+
+Example:
+For word = "hello" and skeletons = ["hello", "hero", "+n1-", "hello"],
+the output should be ["hello", "hello"].
+
+Note: You are not expected to provide the most optimal solution. A solution with time complexity not worse than 
+O
+(
+skeletons.length
+×
+word.length
+2
+)
+O(skeletons.length×word.length 
+2
+ ) is acceptable.
+
+Question 3 – Skeletons Matching Word (Dash Placeholder)
+Problem:
+Same as Question 2, but placeholders can be - (dash) instead of or in addition to ..
+
+Example:
+For word = "hello" and skeletons = ["hello", "hero", "-q1", "hello"],
+the output should be ["hello", "hello"].
+
+Explanation given:
+
+"hello" → matches directly.
+
+"hero" → fails because placeholders cannot match both l characters.
+
+"-q1" → fails due to mismatched placeholders.
+
+"hello" → matches directly.
+
+Question 4 – Maximum Overlap Point from Lamps
+Problem:
+You are given a two-dimensional array lamps. Each lamp has:
+
+An initial position (integer)
+
+A radius (non-integer? possibly integer based on example)
+
+Each lamp covers the interval [position - radius, position + radius].
+Your task is to find the coordinate of the point that is covered by the maximum number of lamps.
+If there are multiple such points, return the smallest coordinate.
+
+Given in description:
+lamps = [[x1, 3], [2, 3], [2, 3]] — but values are unclear.
+
+Return:
+A single integer (or float) representing the best coordinate.
